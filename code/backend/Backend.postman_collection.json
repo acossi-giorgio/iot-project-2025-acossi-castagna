@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "2328cb59-61ee-4f1e-875c-8e699cf15630",
+		"name": "Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23296351",
+		"_collection_link": "https://bold-desert-56425.postman.co/workspace/IoT~c7cd3f8d-ea94-4223-bff3-6e690965237e/collection/23296351-2328cb59-61ee-4f1e-875c-8e699cf15630?action=share&source=collection_link&creator=23296351"
+	},
+	"item": [
+		{
+			"name": "/interaction/submit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"deviceId\": \"alpha-01\",\r\n    \"question\": \"non stò molto bene\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/backend/interaction/submit",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"backend",
+						"interaction",
+						"submit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/interaction/ask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"deviceId\": \"device-1\",\r\n    \"sessionId\": \"691076f43d9a854274efbd28\",\r\n    \"question\": \"A ny serious burn injury: assess the burn depth and total burn surface area, commence fluid resuscitation (transfer preferably to a specialist burns unit).\",\r\n    \"dataAnalysis\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/backend/interaction/ask",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"backend",
+						"interaction",
+						"ask"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/session/start",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"deviceId\": \"device-1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/backend/session/start",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"backend",
+						"session",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/session/end",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"deviceId\": \"device-1\",\r\n    \"sessionId\": \"69028569c7ffc55ddae4a66a\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/backend/session/end",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"backend",
+						"session",
+						"end"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/document/upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "postman-cloud:///1f0b1a15-95ec-4740-a70a-67e25f5b24e6"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/backend//document/upload",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"backend",
+						"",
+						"document",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/interaction/submit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"deviceId\": \"alpha-01\",\r\n    \"question\": \"non stò molto bene\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/backend/interaction/submit",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"backend",
+						"interaction",
+						"submit"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

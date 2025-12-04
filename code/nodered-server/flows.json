@@ -1,0 +1,3005 @@
+[
+    {
+        "id": "978e479f14af456d",
+        "type": "tab",
+        "label": "Admin Dashboard",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "53ddc6348f2f7206",
+        "type": "tab",
+        "label": "Data Ingestion",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "021a5a8ab20c8971",
+        "type": "tab",
+        "label": "Device Status Flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6f4703a7a17badf9",
+        "type": "global-config",
+        "env": [
+            {
+                "name": "INFLUX_TOKEN",
+                "value": "uKxjyZ0H4tg84dko",
+                "type": "str"
+            },
+            {
+                "name": "INFLUX_BUCKET",
+                "value": "vitals",
+                "type": "str"
+            },
+            {
+                "name": "INFLUX_ORG",
+                "value": "acme-iot",
+                "type": "str"
+            },
+            {
+                "name": "MEAS_PREFIX",
+                "value": "vitals_",
+                "type": "str"
+            },
+            {
+                "name": "INFLUX_URL",
+                "value": "http://influxdb:8086/api/v2/write?org=acme-iot&bucket=vitals&precision=ns",
+                "type": "str"
+            },
+            {
+                "name": "MEAS_MAP",
+                "value": "{\"heart_rate\": \"heart_rate\",   \"spo2\": \"spo2\",   \"glucose\": \"glucose\",   \"respiratory_rate\": \"respiratory_rate\",   \"body_temperature\": \"body_temperature\",   \"blood_pressure_sys\": \"blood_pressure_sys\",   \"blood_pressure_dia\": \"blood_pressure_dia\" }",
+                "type": "json"
+            },
+            {
+                "name": "FROM_EMAIL",
+                "value": "iot.alerts2025@gmail.com",
+                "type": "str"
+            }
+        ],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.29.0",
+            "node-red-contrib-influxdb": "0.7.0",
+            "node-red-contrib-mongodb4": "3.1.1",
+            "node-red-contrib-full-msg-json-schema-validation": "1.1.0",
+            "node-red-node-email": "5.0.0"
+        }
+    },
+    {
+        "id": "a3dd2248aea84e64",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": "1",
+        "showDisconnectNotification": true,
+        "allowInstall": true
+    },
+    {
+        "id": "7128e9703bd377ba",
+        "type": "ui-theme",
+        "name": "Theme Name",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094ce",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "4d3dd965628c63ba",
+        "type": "ui-page",
+        "name": "Session Details",
+        "ui": "a3dd2248aea84e64",
+        "path": "/sessionDetails",
+        "icon": "chart-box-outline",
+        "layout": "grid",
+        "theme": "7128e9703bd377ba",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "12"
+            }
+        ],
+        "order": 3,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "40a935fdee311fd2",
+        "type": "ui-page",
+        "name": "Sessions",
+        "ui": "a3dd2248aea84e64",
+        "path": "/sessions",
+        "icon": "mdi-account-multiple",
+        "layout": "notebook",
+        "theme": "7128e9703bd377ba",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "008017da05eddd4c",
+        "type": "ui-page",
+        "name": "Devices",
+        "ui": "a3dd2248aea84e64",
+        "path": "/devices",
+        "icon": "mdi-laptop",
+        "layout": "notebook",
+        "theme": "7128e9703bd377ba",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "748b2717e92ec50f",
+        "type": "ui-group",
+        "name": "Session Details",
+        "page": "4d3dd965628c63ba",
+        "width": 12,
+        "height": "1",
+        "order": 1,
+        "showTitle": false,
+        "className": "",
+        "visible": "false",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "4b4d827f9b106ac6",
+        "type": "ui-group",
+        "name": "Sessions",
+        "page": "40a935fdee311fd2",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "e90ec6f9b0c81a6f",
+        "type": "ui-group",
+        "name": "Devices",
+        "page": "008017da05eddd4c",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "637e9650b73f220d",
+        "type": "ui-spacer",
+        "group": "748b2717e92ec50f",
+        "name": "spacer",
+        "tooltip": "",
+        "order": 12,
+        "width": 1,
+        "height": 1,
+        "className": ""
+    },
+    {
+        "id": "a0d7fdb0ab0db467",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "influx db",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://iot-server-influxdb:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "5042053a0204010d",
+        "type": "mongodb4-client",
+        "name": "",
+        "protocol": "mongodb",
+        "hostname": "",
+        "port": "",
+        "dbName": "iot",
+        "appName": "",
+        "authSource": "",
+        "authMechanism": "DEFAULT",
+        "tls": false,
+        "tlsCAFile": "",
+        "tlsCertificateKeyFile": "",
+        "tlsInsecure": false,
+        "connectTimeoutMS": "30000",
+        "socketTimeoutMS": "0",
+        "minPoolSize": "0",
+        "maxPoolSize": "100",
+        "maxIdleTimeMS": "0",
+        "uri": "mongodb://iot-server-mongo:27017",
+        "advanced": "{}",
+        "uriTabActive": "tab-uri-advanced"
+    },
+    {
+        "id": "248f73f323def4f8",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "prepare device query",
+        "func": "const query = {}; \nconst options = {\n    sort: { lastUpdate: 1 }\n};\nmsg.payload = [query, options];\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 420,
+        "wires": [
+            [
+                "2ee9bfc3e71b0b20"
+            ]
+        ]
+    },
+    {
+        "id": "ed0c8f15ad0732af",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "prepare session query",
+        "func": "msg.payload = {};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1240,
+        "y": 560,
+        "wires": [
+            [
+                "d10353d116d9a534"
+            ]
+        ]
+    },
+    {
+        "id": "03b7bf27837ca693",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "sort session",
+        "func": "if (Array.isArray(msg.payload)) {\n    msg.payload.sort((a, b) => {\n        // @ts-ignore\n        return new Date(b.updatedAt) - new Date(a.updatedAt);\n    });\n\n}\n\nconst status=msg.payload.status;\nmsg.payload.forEach(function(element) {\n    if (element.status === \"inactive\")\n        element.status = \"🔴\";\n    else\n         element.status = \"🟢\";   \n});\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1630,
+        "y": 560,
+        "wires": [
+            [
+                "5c63c19f01f6fd25"
+            ]
+        ]
+    },
+    {
+        "id": "d761716153c21cb4",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "prapare influx query",
+        "func": "const devices = msg.payload || [];\nif (devices.length === 0) return null;\n\nconst deviceIds = devices.map(d => `\"${d._id}\"`).join(\", \");\n\nmsg.query = `\nfrom(bucket:\"vitals\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r._measurement == \"health\")\n  |> last()\n`;\n\nmsg.devices = devices;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1640,
+        "y": 420,
+        "wires": [
+            [
+                "4a90c209afcccd34"
+            ]
+        ]
+    },
+    {
+        "id": "64bb8e8ccc7df68e",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "add device health",
+        "func": "const now = Date.now();\nconst points = msg.payload || [];\nconst devices = msg.devices || [];\n\nconst prevStates = global.get(\"deviceStates\") || {};\n\nconst results = devices.map(d => {\n    const point = points.find(p => p._value === d._id);\n    const lastTime = point ? new Date(point._time).getTime() : null;\n    const diff = lastTime ? (now - lastTime) / 1000 : null;\n    const isOnline = diff !== null && diff <= 5;\n\n    const status = isOnline ? \"🟢\" : \"🔴\";\n\n    const prevStatus = prevStates[d._id];\n    if (prevStatus && prevStatus !== status) {\n        const alertMsg = {\n            payload: `⚠️ Device ${d._id} has changed to ${isOnline ? \"ONLINE 🟢\" : \"OFFLINE 🔴\"}`,\n        };\n        node.send([null, alertMsg]);\n    }\n\n    prevStates[d._id] = status;\n\n    return {\n        _id: d._id,\n        name: d.name,\n        status: status,\n        lastUpdate: lastTime ? new Date(lastTime).toISOString() : \"-\"\n    };\n});\n\nglobal.set(\"deviceStates\", prevStates);\nreturn [{ payload: results }, null];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2070,
+        "y": 420,
+        "wires": [
+            [
+                "902be3c8574160e9"
+            ],
+            [
+                "6b338f30818c280e"
+            ]
+        ]
+    },
+    {
+        "id": "e17ebde279b1e377",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "influx in query",
+        "func": "const sessionId = msg.payload;\n\nmsg.query = `\nfrom(bucket: \"vitals\")\n  |> range(start: 0)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vitals_heart_rate\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"sessionId\"] == \"${sessionId}\")\n  |> sort(columns: [\"_time\"], desc: false)\n  |> yield(name: \"raw\")\n`;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2680,
+        "y": 800,
+        "wires": [
+            [
+                "1cc5b19bd6049b09"
+            ]
+        ]
+    },
+    {
+        "id": "20cb8df2ee8654e1",
+        "type": "switch",
+        "z": "978e479f14af456d",
+        "name": "check if empty",
+        "property": "payload.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 3060,
+        "y": 800,
+        "wires": [
+            [
+                "82ed029a0f6b9ae1"
+            ],
+            [
+                "4787d04f248e2c81"
+            ]
+        ]
+    },
+    {
+        "id": "c6b5e91e519c48ee",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "polling managment",
+        "func": "const sessionArray = msg.payload;\n\nconst session = sessionArray[0];\n\nif (!session) {\n    node.status({ fill: \"red\", shape: \"ring\", text: \"session not found\" });\n    msg.payload = \"stop\";\n    return msg;\n}\n\nif (session.status === \"active\") {\n    msg.payload=session._id\n    msg.topic = \"polling\";\n    node.status({ fill: \"green\", shape: \"dot\", text: `${session._id} active` });\n} else {\n    msg.payload = \"stop\";\n    msg.topic = \"polling\";\n    node.status({ fill: \"red\", shape: \"ring\", text: `${session._id} inactive` });\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1870,
+        "y": 720,
+        "wires": [
+            [
+                "8aabf7cbf6bb03e8"
+            ]
+        ]
+    },
+    {
+        "id": "8aabf7cbf6bb03e8",
+        "type": "trigger",
+        "z": "978e479f14af456d",
+        "name": "polling",
+        "op1": "",
+        "op2": "0",
+        "op1type": "pay",
+        "op2type": "str",
+        "duration": "-500",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "stop",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 2130,
+        "y": 720,
+        "wires": [
+            [
+                "e17ebde279b1e377",
+                "91d01501cb02a1ee",
+                "bbe4f9d39efe0890",
+                "ee48bd2c42b12877",
+                "67a37053b834525b",
+                "ede0588b318cd0d8",
+                "d7f77992a0071774",
+                "ec09d63bbd1e55df"
+            ]
+        ]
+    },
+    {
+        "id": "4787d04f248e2c81",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "clear charts",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3410,
+        "y": 820,
+        "wires": [
+            [
+                "d7d4e71d0c702a47"
+            ]
+        ]
+    },
+    {
+        "id": "91d01501cb02a1ee",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "influx in query",
+        "func": "const sessionId = msg.payload;\n\nmsg.query = `\nfrom(bucket: \"vitals\")\n  |> range(start: 0)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vitals_respiratory_rate\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"sessionId\"] == \"${sessionId}\")\n  |> sort(columns: [\"_time\"], desc: false)\n  |> yield(name: \"raw\")\n`;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2680,
+        "y": 940,
+        "wires": [
+            [
+                "7eac2e0e513c912c"
+            ]
+        ]
+    },
+    {
+        "id": "f9ba7864ce8fde12",
+        "type": "switch",
+        "z": "978e479f14af456d",
+        "name": "check if empty",
+        "property": "payload.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 3060,
+        "y": 940,
+        "wires": [
+            [
+                "8eb078df3e15ef77"
+            ],
+            [
+                "f6eba9a57b40894c"
+            ]
+        ]
+    },
+    {
+        "id": "f6eba9a57b40894c",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "clear charts",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3410,
+        "y": 960,
+        "wires": [
+            [
+                "e4524dae7fb92f11"
+            ]
+        ]
+    },
+    {
+        "id": "bbe4f9d39efe0890",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "influx in query",
+        "func": "const sessionId = msg.payload;\n\nmsg.query = `\nfrom(bucket: \"vitals\")\n  |> range(start: 0)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vitals_body_temperature\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"sessionId\"] == \"${sessionId}\")\n  |> sort(columns: [\"_time\"], desc: false)\n  |> yield(name: \"raw\")\n`;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2680,
+        "y": 1100,
+        "wires": [
+            [
+                "83d90c2feecc21d1"
+            ]
+        ]
+    },
+    {
+        "id": "f199330df88c70e1",
+        "type": "switch",
+        "z": "978e479f14af456d",
+        "name": "check if empty",
+        "property": "payload.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 3060,
+        "y": 1100,
+        "wires": [
+            [
+                "0ff42d9fe06e0425"
+            ],
+            [
+                "e85e9cfcc8def0a0"
+            ]
+        ]
+    },
+    {
+        "id": "e85e9cfcc8def0a0",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "clear charts",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3410,
+        "y": 1120,
+        "wires": [
+            [
+                "f751d48ec8afa70d"
+            ]
+        ]
+    },
+    {
+        "id": "ee48bd2c42b12877",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "influx in query",
+        "func": "const sessionId = msg.payload;\n\nmsg.query = `\nfrom(bucket: \"vitals\")\n  |> range(start: 0)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vitals_blood_pressure_sys\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"sessionId\"] == \"${sessionId}\")\n  |> sort(columns: [\"_time\"], desc: false)\n  |> yield(name: \"raw\")\n`;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2680,
+        "y": 1260,
+        "wires": [
+            [
+                "8c4e26db5f84529a"
+            ]
+        ]
+    },
+    {
+        "id": "14a36de1dd9b3803",
+        "type": "switch",
+        "z": "978e479f14af456d",
+        "name": "check if empty",
+        "property": "payload.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 3060,
+        "y": 1260,
+        "wires": [
+            [
+                "8932037a09124af8"
+            ],
+            [
+                "251de349c8cacee6"
+            ]
+        ]
+    },
+    {
+        "id": "251de349c8cacee6",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "clear charts",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3430,
+        "y": 1280,
+        "wires": [
+            [
+                "5feba8b2ba091e78"
+            ]
+        ]
+    },
+    {
+        "id": "67a37053b834525b",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "influx in query",
+        "func": "const sessionId = msg.payload;\n\nmsg.query = `\nfrom(bucket: \"vitals\")\n  |> range(start: 0)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vitals_blood_pressure_dia\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"sessionId\"] == \"${sessionId}\")\n  |> sort(columns: [\"_time\"], desc: false)\n  |> yield(name: \"raw\")\n`;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2680,
+        "y": 1420,
+        "wires": [
+            [
+                "9d90b276d6b591b7"
+            ]
+        ]
+    },
+    {
+        "id": "84b8e862b088008f",
+        "type": "switch",
+        "z": "978e479f14af456d",
+        "name": "check if empty",
+        "property": "payload.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 3060,
+        "y": 1420,
+        "wires": [
+            [
+                "7678a2a595e948ed"
+            ],
+            [
+                "7ec11eaad9c02dfb"
+            ]
+        ]
+    },
+    {
+        "id": "7ec11eaad9c02dfb",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "clear charts",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3470,
+        "y": 1440,
+        "wires": [
+            [
+                "5feba8b2ba091e78"
+            ]
+        ]
+    },
+    {
+        "id": "ede0588b318cd0d8",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "influx in query",
+        "func": "const sessionId = msg.payload;\n\nmsg.query = `\nfrom(bucket: \"vitals\")\n  |> range(start: 0)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vitals_glucose\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"sessionId\"] == \"${sessionId}\")\n  |> sort(columns: [\"_time\"], desc: false)\n  |> yield(name: \"raw\")\n`;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2680,
+        "y": 1580,
+        "wires": [
+            [
+                "1723330918b8593f"
+            ]
+        ]
+    },
+    {
+        "id": "1cae0cd4406c4c93",
+        "type": "switch",
+        "z": "978e479f14af456d",
+        "name": "check if empty",
+        "property": "payload.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 3080,
+        "y": 1580,
+        "wires": [
+            [
+                "7ed75b15cc36af1c"
+            ],
+            [
+                "a7138a740985bae8"
+            ]
+        ]
+    },
+    {
+        "id": "a7138a740985bae8",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "clear charts",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3430,
+        "y": 1600,
+        "wires": [
+            [
+                "14beaed75e431d33"
+            ]
+        ]
+    },
+    {
+        "id": "d7f77992a0071774",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "influx in query",
+        "func": "const sessionId = msg.payload.toString().trim();\n\nmsg.query = `\nfrom(bucket: \"vitals\")\n  |> range(start: 0)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vitals_spo2\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> filter(fn: (r) => r[\"sessionId\"] == \"${sessionId}\")\n  |> sort(columns: [\"_time\"], desc: false)\n  |> yield(name: \"raw\")\n`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2680,
+        "y": 1720,
+        "wires": [
+            [
+                "90a790c05db85d1a"
+            ]
+        ]
+    },
+    {
+        "id": "10f02c311bb521b7",
+        "type": "switch",
+        "z": "978e479f14af456d",
+        "name": "check if empty",
+        "property": "payload.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 3080,
+        "y": 1720,
+        "wires": [
+            [
+                "8fd37e4617c3ce47"
+            ],
+            [
+                "2c195d2cbe0fe67c"
+            ]
+        ]
+    },
+    {
+        "id": "7c3cfc4944153684",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "prepare chart",
+        "func": "const first = msg.payload[0];\nconst measurement = first._measurement || \"unknown\";\nconst unit = first.unit || \"\";\n\nconst dataPoints = msg.payload.map(d => ({\n    x: new Date(d._time).getTime(),\n    y: d._value \n}));\n\nmsg.payload = dataPoints;\nmsg.topic = `${measurement}${unit ? \" (\" + unit + \")\" : \"\"}`;\nnode.status({ fill: \"green\", shape: \"dot\", text: `${measurement} ${unit}` });\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3530,
+        "y": 1680,
+        "wires": [
+            [
+                "6b48e817219603c5"
+            ]
+        ]
+    },
+    {
+        "id": "2c195d2cbe0fe67c",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "clear charts",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3430,
+        "y": 1740,
+        "wires": [
+            [
+                "6b48e817219603c5"
+            ]
+        ]
+    },
+    {
+        "id": "d5177ab23154c8dd",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "check session",
+        "func": "const sessionArray = msg.payload;\nconst session = sessionArray[0];\nif (!session) {\n    node.status({ fill: \"red\", shape: \"ring\", text: \"session not found\" });\n    return [null, { payload: null }];\n}\n\nnode.status({ fill: \"green\", shape: \"dot\", text: \"session found\" });\nmsg.payload = session._id;\n\nreturn [msg, null];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1860,
+        "y": 800,
+        "wires": [
+            [
+                "e17ebde279b1e377",
+                "91d01501cb02a1ee",
+                "bbe4f9d39efe0890",
+                "ee48bd2c42b12877",
+                "67a37053b834525b",
+                "ede0588b318cd0d8",
+                "d7f77992a0071774",
+                "ec09d63bbd1e55df"
+            ],
+            [
+                "f6eba9a57b40894c",
+                "e85e9cfcc8def0a0",
+                "7ec11eaad9c02dfb",
+                "a7138a740985bae8",
+                "2c195d2cbe0fe67c",
+                "251de349c8cacee6",
+                "4787d04f248e2c81",
+                "3801e2e19c44cd83"
+            ]
+        ]
+    },
+    {
+        "id": "10ba7c3162e3ad56",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "set session id",
+        "func": "msg.topic=\"sessionId\"\n\nlet newSessionId = msg.payload;\nlet oldSessionId = flow.get(\"sessionId\");\n\nif (newSessionId === oldSessionId) return null; \n\nflow.set(\"sessionId\", newSessionId);\n\nflow.set(\"lastBPTimestamp\", null);\nflow.set(\"lastHRTimestamp\", null);\nflow.set(\"lastBTTimestamp\", null);\nflow.set(\"lastRRTimestamp\", null);\nflow.set(\"lastBPsTimestamp\", null);\nflow.set(\"lastBPdTimestamp\", null);\nflow.set(\"lastgTimestamp\", null);\nflow.set(\"lastspTimestamp\", null);\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 720,
+        "wires": [
+            [
+                "05beb7b08689a8e0"
+            ]
+        ]
+    },
+    {
+        "id": "1bdac26e1fe6b9d2",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "compose interaction table",
+        "func": "if (!Array.isArray(msg.payload)) {\n    msg.payload = [msg.payload];\n}\n\nmsg.payload = msg.payload.map(row => {\n    if (row.answer) {\n        let formattedAnswer = row.answer;\n        formattedAnswer = formattedAnswer.replace(/(?:^|\\n)#{1,6}\\s*(.*?)(?:\\n|$)/g, \"<b>$1</b><br>\");\n        formattedAnswer = formattedAnswer.replace(/\\*\\*(.*?)\\*\\*/g, \"<b>$1</b>\");\n        formattedAnswer = formattedAnswer.replace(/(?:^|\\n)[\\*\\-]\\s+(.*)/g, \"<br>• $1\");\n        formattedAnswer = formattedAnswer.replace(/\\n/g, \"<br>\");\n        row.answer = formattedAnswer;\n    }\n\n    if (Array.isArray(row.diagnosis) && row.diagnosis.length > 0) {\n        const listItems = row.diagnosis\n            .map(d => `<li>${d}</li>`)\n            .join(\"\");\n        row.diagnosis = `<ul style=\"margin: 0; padding-left: 20px;\">${listItems}</ul>`;\n    } else {\n        row.diagnosis = \"\";\n    }\n    if (row.vitals && typeof row.vitals === 'object' && !Array.isArray(row.vitals)) {\n        \n        let vitalsNameMap = {\n            \"rr\": \"Respiration Rate\",\n            \"spo2\": \"SPO2\",\n            \"temp\": \"Body Temperature\",\n            \"sbp\": \"Systolic Blood Pressure\",\n            \"dbp\": \"Diastolic Blood Pressure\",\n            \"glucose\": \"Glucose\",\n            \"hr\": \"Heart Rate\"\n        };\n        \n        const listItems = Object.entries(row.vitals)\n            .map(([key, stats]) => {\n                let name = vitalsNameMap[key] || key;\n                let meanVal = (typeof stats.mean === 'number') ? stats.mean.toFixed(1) : stats.mean;\n                return `<li><b>${name}:</b> Min: ${stats.min}, Max: ${stats.max}, Mean: ${meanVal}, Latest: ${stats.latest}</li>`;\n            })\n            .join(\"\");\n\n        if (listItems) {\n            row.vitals = `<ul style=\"margin: 0; padding-left: 20px;\">${listItems}</ul>`;\n        } else {\n            row.vitals = \"\";\n        }\n    } else {\n        row.vitals = \"\";\n    }\n\n    if (Array.isArray(row.chunks) && row.chunks.length > 0) {\n        const listItems = row.chunks\n            .filter(group => Array.isArray(group) && group[0] && group[0].metadata)\n            .map(group => {\n                const meta = group[0].metadata;\n                const source = meta.source || 'N/A';\n                return `<li>${meta.page ? `${source} (Pg.${meta.page})` : source}</li>`;\n            })\n            .join(\"\");\n\n        if (listItems) {\n            row.chunks = `<ul style=\"margin: 0; padding-left: 20px;\">${listItems}</ul>`;\n        } else {\n            row.chunks = \"\";\n        }\n    } else {\n        row.chunks = \"\";\n    }\n\n    if (row.createdAt && row.createdAt.$date) {\n        row.createdAt = new Date(row.createdAt.$date)\n            .toLocaleString('it-IT', { dateStyle: 'short', timeStyle: 'short' });\n    }\n\n    return row;\n});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2910,
+        "y": 720,
+        "wires": [
+            [
+                "ea28b240fc72d2c6"
+            ]
+        ]
+    },
+    {
+        "id": "ec09d63bbd1e55df",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "interaction query",
+        "func": "let sessionId = msg.payload\n\nif (typeof sessionId !== \"string\") {\n    sessionId = String(sessionId);\n}\n\nsessionId = sessionId.trim();\n\nmsg.payload = { sessionId: sessionId };\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2460,
+        "y": 720,
+        "wires": [
+            [
+                "5c3cf16ba8265335"
+            ]
+        ]
+    },
+    {
+        "id": "8fd37e4617c3ce47",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "get new samples",
+        "func": "const TIMESTAMP_KEY = \"_time\"; \n\nlet lastTimestamp = flow.get(\"lastspTimestamp\") || 0;\nconst newData = msg.payload;\n\nconst itemsToAppend = newData.filter(item => {\n    let itemTime = new Date(item[TIMESTAMP_KEY]).getTime();\n    return itemTime > lastTimestamp;\n});\n\nif (itemsToAppend.length > 0) {\n    const newLastTimestamp = new Date(itemsToAppend[itemsToAppend.length - 1][TIMESTAMP_KEY]).getTime();\n    flow.set(\"lastspTimestamp\", newLastTimestamp);\n    msg.payload = itemsToAppend;\n    return msg;\n} else {\n    return null;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3330,
+        "y": 1680,
+        "wires": [
+            [
+                "7c3cfc4944153684"
+            ]
+        ]
+    },
+    {
+        "id": "6aebc1cdad957940",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "prepare chart",
+        "func": "const first = msg.payload[0];\nconst measurement = first._measurement || \"unknown\";\nconst unit = first.unit || \"\";\n\nconst dataPoints = msg.payload.map(d => ({\n    x: new Date(d._time).getTime(),\n    y: d._value \n}));\n\nmsg.payload = dataPoints;\nmsg.topic = `${measurement}${unit ? \" (\" + unit + \")\" : \"\"}`;\nnode.status({ fill: \"green\", shape: \"dot\", text: `${measurement} ${unit}` });\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3510,
+        "y": 1540,
+        "wires": [
+            [
+                "14beaed75e431d33"
+            ]
+        ]
+    },
+    {
+        "id": "7ed75b15cc36af1c",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "get new samples",
+        "func": "const TIMESTAMP_KEY = \"_time\"; \n\nlet lastTimestamp = flow.get(\"lastgTimestamp\") || 0;\nconst newData = msg.payload;\n\nconst itemsToAppend = newData.filter(item => {\n    let itemTime = new Date(item[TIMESTAMP_KEY]).getTime();\n    return itemTime > lastTimestamp;\n});\n\nif (itemsToAppend.length > 0) {\n    const newLastTimestamp = new Date(itemsToAppend[itemsToAppend.length - 1][TIMESTAMP_KEY]).getTime();\n    flow.set(\"lastgTimestamp\", newLastTimestamp);\n    msg.payload = itemsToAppend;\n    return msg;\n} else {\n    return null;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3310,
+        "y": 1540,
+        "wires": [
+            [
+                "6aebc1cdad957940"
+            ]
+        ]
+    },
+    {
+        "id": "040eaaeaf61f3354",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "prepare chart",
+        "func": "const first = msg.payload[0];\nconst measurement = first._measurement || \"unknown\";\nconst unit = first.unit || \"\";\n\nconst dataPoints = msg.payload.map(d => ({\n    x: new Date(d._time).getTime(),\n    y: d._value \n}));\n\nmsg.payload = dataPoints;\nmsg.topic = `${measurement}${unit ? \" (\" + unit + \")\" : \"\"}`;\nnode.status({ fill: \"green\", shape: \"dot\", text: `${measurement} ${unit}` });\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3510,
+        "y": 1380,
+        "wires": [
+            [
+                "5feba8b2ba091e78"
+            ]
+        ]
+    },
+    {
+        "id": "7678a2a595e948ed",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "get new samples",
+        "func": "const TIMESTAMP_KEY = \"_time\"; \n\nlet lastTimestamp = flow.get(\"lastBPdTimestamp\") || 0;\nconst newData = msg.payload;\n\nconst itemsToAppend = newData.filter(item => {\n    let itemTime = new Date(item[TIMESTAMP_KEY]).getTime();\n    return itemTime > lastTimestamp;\n});\n\nif (itemsToAppend.length > 0) {\n    const newLastTimestamp = new Date(itemsToAppend[itemsToAppend.length - 1][TIMESTAMP_KEY]).getTime();\n    flow.set(\"lastBPdTimestamp\", newLastTimestamp);\n    msg.payload = itemsToAppend;\n    return msg;\n} else {\n    return null;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3310,
+        "y": 1380,
+        "wires": [
+            [
+                "040eaaeaf61f3354"
+            ]
+        ]
+    },
+    {
+        "id": "bf3979a4639087d8",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "prepare chart",
+        "func": "const first = msg.payload[0];\nconst measurement = first._measurement || \"unknown\";\nconst unit = first.unit || \"\";\n\nconst dataPoints = msg.payload.map(d => ({\n    x: new Date(d._time).getTime(),\n    y: d._value \n}));\n\nmsg.payload = dataPoints;\nmsg.topic = `${measurement}${unit ? \" (\" + unit + \")\" : \"\"}`;\nnode.status({ fill: \"green\", shape: \"dot\", text: `${measurement} ${unit}` });\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3510,
+        "y": 1220,
+        "wires": [
+            [
+                "5feba8b2ba091e78"
+            ]
+        ]
+    },
+    {
+        "id": "8932037a09124af8",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "get new samples",
+        "func": "const TIMESTAMP_KEY = \"_time\"; \n\nlet lastTimestamp = flow.get(\"lastBPsTimestamp\") || 0;\nconst newData = msg.payload;\n\nconst itemsToAppend = newData.filter(item => {\n    let itemTime = new Date(item[TIMESTAMP_KEY]).getTime();\n    return itemTime > lastTimestamp;\n});\n\nif (itemsToAppend.length > 0) {\n    const newLastTimestamp = new Date(itemsToAppend[itemsToAppend.length - 1][TIMESTAMP_KEY]).getTime();\n    flow.set(\"lastBPsTimestamp\", newLastTimestamp);\n    msg.payload = itemsToAppend;\n    return msg;\n} else {\n    return null;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3310,
+        "y": 1220,
+        "wires": [
+            [
+                "bf3979a4639087d8"
+            ]
+        ]
+    },
+    {
+        "id": "d9ae60a854f19b87",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "prepare chart",
+        "func": "const first = msg.payload[0];\nconst measurement = first._measurement || \"unknown\";\nconst unit = first.unit || \"\";\n\nconst dataPoints = msg.payload.map(d => ({\n    x: new Date(d._time).getTime(),\n    y: d._value \n}));\n\nmsg.payload = dataPoints;\nmsg.topic = `${measurement}${unit ? \" (\" + unit + \")\" : \"\"}`;\nnode.status({ fill: \"green\", shape: \"dot\", text: `${measurement} ${unit}` });\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3530,
+        "y": 900,
+        "wires": [
+            [
+                "e4524dae7fb92f11"
+            ]
+        ]
+    },
+    {
+        "id": "8eb078df3e15ef77",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "get new samples",
+        "func": "const TIMESTAMP_KEY = \"_time\"; \n\nlet lastTimestamp = flow.get(\"lastRRTimestamp\") || 0;\nconst newData = msg.payload;\n\nconst itemsToAppend = newData.filter(item => {\n    let itemTime = new Date(item[TIMESTAMP_KEY]).getTime();\n    return itemTime > lastTimestamp;\n});\n\nif (itemsToAppend.length > 0) {\n    const newLastTimestamp = new Date(itemsToAppend[itemsToAppend.length - 1][TIMESTAMP_KEY]).getTime();\n    flow.set(\"lastRRTimestamp\", newLastTimestamp);\n    msg.payload = itemsToAppend;\n    return msg;\n} else {\n    return null;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3310,
+        "y": 900,
+        "wires": [
+            [
+                "d9ae60a854f19b87"
+            ]
+        ]
+    },
+    {
+        "id": "c21e068b8f9123ec",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "prepare chart",
+        "func": "const first = msg.payload[0];\nconst measurement = first._measurement || \"unknown\";\nconst unit = first.unit || \"\";\n\nconst dataPoints = msg.payload.map(d => ({\n    x: new Date(d._time).getTime(),\n    y: d._value \n}));\n\nmsg.payload = dataPoints;\nmsg.topic = `${measurement}${unit ? \" (\" + unit + \")\" : \"\"}`;\nnode.status({ fill: \"green\", shape: \"dot\", text: `${measurement} ${unit}` });\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3530,
+        "y": 1060,
+        "wires": [
+            [
+                "f751d48ec8afa70d"
+            ]
+        ]
+    },
+    {
+        "id": "0ff42d9fe06e0425",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "get new samples",
+        "func": "const TIMESTAMP_KEY = \"_time\"; \n\nlet lastTimestamp = flow.get(\"lastBTTimestamp\") || 0;\nconst newData = msg.payload;\n\nconst itemsToAppend = newData.filter(item => {\n    let itemTime = new Date(item[TIMESTAMP_KEY]).getTime();\n    return itemTime > lastTimestamp;\n});\n\nif (itemsToAppend.length > 0) {\n    const newLastTimestamp = new Date(itemsToAppend[itemsToAppend.length - 1][TIMESTAMP_KEY]).getTime();\n    flow.set(\"lastBTTimestamp\", newLastTimestamp);\n    msg.payload = itemsToAppend;\n    return msg;\n} else {\n    return null;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3310,
+        "y": 1060,
+        "wires": [
+            [
+                "c21e068b8f9123ec"
+            ]
+        ]
+    },
+    {
+        "id": "f6039a760dbfe50b",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "prepare chart",
+        "func": "const first = msg.payload[0];\nconst measurement = first._measurement || \"unknown\";\nconst unit = first.unit || \"\";\n\nconst dataPoints = msg.payload.map(d => ({\n    x: new Date(d._time).getTime(),\n    y: d._value \n}));\n\nmsg.payload = dataPoints;\nmsg.topic = `${measurement}${unit ? \" (\" + unit + \")\" : \"\"}`;\nnode.status({ fill: \"green\", shape: \"dot\", text: `${measurement} ${unit}` });\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3530,
+        "y": 760,
+        "wires": [
+            [
+                "d7d4e71d0c702a47"
+            ]
+        ]
+    },
+    {
+        "id": "82ed029a0f6b9ae1",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "get new samples",
+        "func": "const TIMESTAMP_KEY = \"_time\"; \n\nlet lastTimestamp = flow.get(\"lastHRTimestamp\") || 0;\nconst newData = msg.payload;\n\nconst itemsToAppend = newData.filter(item => {\n    let itemTime = new Date(item[TIMESTAMP_KEY]).getTime();\n    return itemTime > lastTimestamp;\n});\n\nif (itemsToAppend.length > 0) {\n    const newLastTimestamp = new Date(itemsToAppend[itemsToAppend.length - 1][TIMESTAMP_KEY]).getTime();\n    flow.set(\"lastHRTimestamp\", newLastTimestamp);\n    msg.payload = itemsToAppend;\n    return msg;\n} else {\n    return null;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3310,
+        "y": 760,
+        "wires": [
+            [
+                "f6039a760dbfe50b"
+            ]
+        ]
+    },
+    {
+        "id": "4a90c209afcccd34",
+        "type": "influxdb in",
+        "z": "978e479f14af456d",
+        "influxdb": "a0d7fdb0ab0db467",
+        "name": "influx in",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "acme-iot",
+        "x": 1860,
+        "y": 420,
+        "wires": [
+            [
+                "64bb8e8ccc7df68e"
+            ]
+        ]
+    },
+    {
+        "id": "1cc5b19bd6049b09",
+        "type": "influxdb in",
+        "z": "978e479f14af456d",
+        "influxdb": "a0d7fdb0ab0db467",
+        "name": "influx in",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "acme-iot",
+        "x": 2880,
+        "y": 800,
+        "wires": [
+            [
+                "20cb8df2ee8654e1"
+            ]
+        ]
+    },
+    {
+        "id": "7eac2e0e513c912c",
+        "type": "influxdb in",
+        "z": "978e479f14af456d",
+        "influxdb": "a0d7fdb0ab0db467",
+        "name": "influx in",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "acme-iot",
+        "x": 2880,
+        "y": 940,
+        "wires": [
+            [
+                "f9ba7864ce8fde12"
+            ]
+        ]
+    },
+    {
+        "id": "83d90c2feecc21d1",
+        "type": "influxdb in",
+        "z": "978e479f14af456d",
+        "influxdb": "a0d7fdb0ab0db467",
+        "name": "influx in",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "acme-iot",
+        "x": 2860,
+        "y": 1100,
+        "wires": [
+            [
+                "f199330df88c70e1"
+            ]
+        ]
+    },
+    {
+        "id": "8c4e26db5f84529a",
+        "type": "influxdb in",
+        "z": "978e479f14af456d",
+        "influxdb": "a0d7fdb0ab0db467",
+        "name": "influx in",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "acme-iot",
+        "x": 2880,
+        "y": 1260,
+        "wires": [
+            [
+                "14a36de1dd9b3803"
+            ]
+        ]
+    },
+    {
+        "id": "9d90b276d6b591b7",
+        "type": "influxdb in",
+        "z": "978e479f14af456d",
+        "influxdb": "a0d7fdb0ab0db467",
+        "name": "influx in",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "acme-iot",
+        "x": 2880,
+        "y": 1420,
+        "wires": [
+            [
+                "84b8e862b088008f"
+            ]
+        ]
+    },
+    {
+        "id": "1723330918b8593f",
+        "type": "influxdb in",
+        "z": "978e479f14af456d",
+        "influxdb": "a0d7fdb0ab0db467",
+        "name": "influx in",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "acme-iot",
+        "x": 2880,
+        "y": 1580,
+        "wires": [
+            [
+                "1cae0cd4406c4c93"
+            ]
+        ]
+    },
+    {
+        "id": "90a790c05db85d1a",
+        "type": "influxdb in",
+        "z": "978e479f14af456d",
+        "influxdb": "a0d7fdb0ab0db467",
+        "name": "influx in",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "acme-iot",
+        "x": 2880,
+        "y": 1720,
+        "wires": [
+            [
+                "10f02c311bb521b7"
+            ]
+        ]
+    },
+    {
+        "id": "86257f645672e1f3",
+        "type": "ui-text-input",
+        "z": "978e479f14af456d",
+        "group": "748b2717e92ec50f",
+        "name": "SessionId",
+        "label": "Session Id",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "topic": "sessionId",
+        "topicType": "msg",
+        "mode": "text",
+        "tooltip": "",
+        "delay": "1",
+        "passthru": true,
+        "sendOnDelay": true,
+        "sendOnBlur": false,
+        "sendOnEnter": true,
+        "className": "",
+        "clearable": true,
+        "sendOnClear": true,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "x": 1020,
+        "y": 720,
+        "wires": [
+            [
+                "10ba7c3162e3ad56"
+            ]
+        ]
+    },
+    {
+        "id": "d7d4e71d0c702a47",
+        "type": "ui-chart",
+        "z": "978e479f14af456d",
+        "group": "748b2717e92ec50f",
+        "name": "Hearth Rate Chart",
+        "label": "Hearth Rate",
+        "order": 6,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "time",
+        "xAxisProperty": "x",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "value",
+        "yAxisProperty": "y",
+        "yAxisPropertyType": "property",
+        "ymin": "40",
+        "ymax": "200",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "0",
+        "removeOlderUnit": "1",
+        "removeOlderPoints": "10000000",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "smooth",
+        "x": 3790,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e4524dae7fb92f11",
+        "type": "ui-chart",
+        "z": "978e479f14af456d",
+        "group": "748b2717e92ec50f",
+        "name": "Respiratory Rate chart",
+        "label": "Respirtory Rate",
+        "order": 9,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "time",
+        "xAxisProperty": "x",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "value",
+        "yAxisProperty": "y",
+        "yAxisPropertyType": "property",
+        "ymin": "8",
+        "ymax": "40",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "0",
+        "removeOlderUnit": "1",
+        "removeOlderPoints": "10000000",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "smooth",
+        "x": 3800,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f751d48ec8afa70d",
+        "type": "ui-chart",
+        "z": "978e479f14af456d",
+        "group": "748b2717e92ec50f",
+        "name": "Body Temperature Chart",
+        "label": "Body Temperature",
+        "order": 7,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "time",
+        "xAxisProperty": "x",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "value",
+        "yAxisProperty": "y",
+        "yAxisPropertyType": "property",
+        "ymin": "34",
+        "ymax": "41",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "0",
+        "removeOlderUnit": "1",
+        "removeOlderPoints": "10000000",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "smooth",
+        "x": 3810,
+        "y": 1100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5feba8b2ba091e78",
+        "type": "ui-chart",
+        "z": "978e479f14af456d",
+        "group": "748b2717e92ec50f",
+        "name": "Blood Pressure Chart",
+        "label": "Blood Pressure",
+        "order": 8,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "time",
+        "xAxisProperty": "x",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "value",
+        "yAxisProperty": "y",
+        "yAxisPropertyType": "property",
+        "ymin": "40",
+        "ymax": "200",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "0",
+        "removeOlderUnit": "1",
+        "removeOlderPoints": "10000000",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "smooth",
+        "x": 3800,
+        "y": 1340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "14beaed75e431d33",
+        "type": "ui-chart",
+        "z": "978e479f14af456d",
+        "group": "748b2717e92ec50f",
+        "name": "Glucose Chart",
+        "label": "Glucose",
+        "order": 4,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "time",
+        "xAxisProperty": "x",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "value",
+        "yAxisProperty": "y",
+        "yAxisPropertyType": "property",
+        "ymin": "60",
+        "ymax": "200",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "0",
+        "removeOlderUnit": "1",
+        "removeOlderPoints": "10000000",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "smooth",
+        "x": 3740,
+        "y": 1580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6b48e817219603c5",
+        "type": "ui-chart",
+        "z": "978e479f14af456d",
+        "group": "748b2717e92ec50f",
+        "name": "Spo2 Chart",
+        "label": "SPO2",
+        "order": 5,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "time",
+        "xAxisProperty": "x",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "value",
+        "yAxisProperty": "y",
+        "yAxisPropertyType": "property",
+        "ymin": "80",
+        "ymax": "100",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "0",
+        "removeOlderUnit": "1",
+        "removeOlderPoints": "10000000",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "smooth",
+        "x": 3730,
+        "y": 1720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "902be3c8574160e9",
+        "type": "ui-table",
+        "z": "978e479f14af456d",
+        "group": "e90ec6f9b0c81a6f",
+        "name": "Devices Table",
+        "label": "",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "maxrows": 0,
+        "passthru": false,
+        "autocols": false,
+        "showSearch": true,
+        "deselect": true,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Device Id",
+                "key": "_id",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "center"
+            },
+            {
+                "title": "Name",
+                "key": "name",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "center"
+            },
+            {
+                "title": "Status",
+                "key": "status",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "center"
+            },
+            {
+                "title": "Last Update",
+                "key": "lastUpdate",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "center"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "className": "",
+        "x": 2340,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5c63c19f01f6fd25",
+        "type": "ui-table",
+        "z": "978e479f14af456d",
+        "group": "4b4d827f9b106ac6",
+        "name": "Sessions Tables",
+        "label": "",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "maxrows": 0,
+        "passthru": false,
+        "autocols": false,
+        "showSearch": true,
+        "deselect": true,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Id",
+                "key": "_id",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Device Id",
+                "key": "deviceId",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "center"
+            },
+            {
+                "title": "Created At",
+                "key": "createdAt",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "center"
+            },
+            {
+                "title": "Updated At",
+                "key": "updatedAt",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "center"
+            },
+            {
+                "title": "Status",
+                "key": "status",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "center"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "className": "",
+        "x": 1840,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ea28b240fc72d2c6",
+        "type": "ui-table",
+        "z": "978e479f14af456d",
+        "group": "748b2717e92ec50f",
+        "name": "Interaction Table",
+        "label": "",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "maxrows": 0,
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "deselect": true,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Question",
+                "key": "question",
+                "keyType": "key",
+                "type": "html",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Rephrased Question",
+                "key": "rephrasedQuestion",
+                "keyType": "key",
+                "type": "html",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Answer",
+                "key": "answer",
+                "keyType": "key",
+                "type": "html",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Chunks",
+                "key": "chunks",
+                "keyType": "key",
+                "type": "html",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Vitals",
+                "key": "vitals",
+                "keyType": "key",
+                "type": "html",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Diagnosis",
+                "key": "diagnosis",
+                "keyType": "key",
+                "type": "html",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Type",
+                "key": "type",
+                "keyType": "key",
+                "type": "html",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Crated At",
+                "key": "createdAt",
+                "keyType": "key",
+                "type": "html",
+                "width": "",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "className": "",
+        "x": 3120,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c00d5d0d2bff6af1",
+        "type": "ui-markdown",
+        "z": "978e479f14af456d",
+        "group": "748b2717e92ec50f",
+        "name": "Vitals",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "content": "<div style=\"text-align: center;\">\n\n## Vitals\n\n</div>",
+        "className": "",
+        "x": 870,
+        "y": 1100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b8651f9cfa612bbe",
+        "type": "ui-markdown",
+        "z": "978e479f14af456d",
+        "group": "748b2717e92ec50f",
+        "name": "Interactions",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "content": "<div style=\"text-align: center;\">\n\n## Interactions\n\n</div>",
+        "className": "",
+        "x": 890,
+        "y": 1140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "be6bf67f08d0fb1b",
+        "type": "ui-markdown",
+        "z": "978e479f14af456d",
+        "group": "748b2717e92ec50f",
+        "name": "Session Details",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "content": "<div style=\"text-align: center;\">\n\n# Session Details\n\n</div>",
+        "className": "",
+        "x": 900,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "21258561af7e196e",
+        "type": "ui-markdown",
+        "z": "978e479f14af456d",
+        "group": "4b4d827f9b106ac6",
+        "name": "Sessions",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "content": "<div style=\"text-align: center;\">\n\n# Sessions\n\n</div>",
+        "className": "",
+        "x": 880,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8b6744348125c768",
+        "type": "ui-markdown",
+        "z": "978e479f14af456d",
+        "group": "e90ec6f9b0c81a6f",
+        "name": "Devices",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "content": "<div style=\"text-align: center;\">\n\n# Devices\n\n</div>",
+        "className": "",
+        "x": 880,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2ee9bfc3e71b0b20",
+        "type": "mongodb4",
+        "z": "978e479f14af456d",
+        "clientNode": "5042053a0204010d",
+        "mode": "collection",
+        "collection": "devices",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "",
+        "handleDocId": true,
+        "name": "get devices",
+        "x": 1410,
+        "y": 420,
+        "wires": [
+            [
+                "d761716153c21cb4"
+            ]
+        ]
+    },
+    {
+        "id": "d10353d116d9a534",
+        "type": "mongodb4",
+        "z": "978e479f14af456d",
+        "clientNode": "5042053a0204010d",
+        "mode": "collection",
+        "collection": "sessions",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "",
+        "handleDocId": true,
+        "name": "get sessions",
+        "x": 1450,
+        "y": 560,
+        "wires": [
+            [
+                "03b7bf27837ca693"
+            ]
+        ]
+    },
+    {
+        "id": "5c3cf16ba8265335",
+        "type": "mongodb4",
+        "z": "978e479f14af456d",
+        "clientNode": "5042053a0204010d",
+        "mode": "collection",
+        "collection": "interactions",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "",
+        "handleDocId": true,
+        "name": "get interactions",
+        "x": 2680,
+        "y": 720,
+        "wires": [
+            [
+                "1bdac26e1fe6b9d2"
+            ]
+        ]
+    },
+    {
+        "id": "23756e6f50a727b9",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "clear input",
+        "func": "if (msg.payload === \"change\" && msg.name === \"Session Details\") {\n    const sessionId = \"\";\n    return { payload: sessionId };\n}\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 720,
+        "wires": [
+            [
+                "86257f645672e1f3"
+            ]
+        ]
+    },
+    {
+        "id": "6b338f30818c280e",
+        "type": "ui-notification",
+        "z": "978e479f14af456d",
+        "ui": "a3dd2248aea84e64",
+        "position": "top right",
+        "colorDefault": true,
+        "color": "#000000",
+        "displayTime": "15",
+        "showCountdown": true,
+        "outputs": 1,
+        "allowDismiss": true,
+        "dismissText": "Close",
+        "allowConfirm": false,
+        "confirmText": "Confirm",
+        "raw": false,
+        "className": "",
+        "name": "Status Changed",
+        "x": 2340,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "21b15d225359bb11",
+        "type": "ui-control",
+        "z": "978e479f14af456d",
+        "name": "",
+        "ui": "a3dd2248aea84e64",
+        "events": "all",
+        "x": 620,
+        "y": 560,
+        "wires": [
+            [
+                "ce113b8cc99e4bfb",
+                "2b1d6c881cb45cf8",
+                "23756e6f50a727b9"
+            ]
+        ]
+    },
+    {
+        "id": "b342f8842b602795",
+        "type": "trigger",
+        "z": "978e479f14af456d",
+        "name": "polling",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "nul",
+        "duration": "-500",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "stop",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 990,
+        "y": 420,
+        "wires": [
+            [
+                "248f73f323def4f8"
+            ]
+        ]
+    },
+    {
+        "id": "2b1d6c881cb45cf8",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "trigger",
+        "func": "if (msg.payload === \"change\") {\n    if (msg.name === \"Devices\")\n        msg.payload=\"polling\";\n    else\n        msg.payload=\"stop\";\n}\nreturn msg;\n    \n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 420,
+        "wires": [
+            [
+                "b342f8842b602795"
+            ]
+        ]
+    },
+    {
+        "id": "ce113b8cc99e4bfb",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "trigger",
+        "func": "if (msg.payload === \"change\") {\n    if (msg.name === \"Sessions\")\n        msg.payload=\"polling\";\n    else\n        msg.payload=\"stop\";\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 560,
+        "wires": [
+            [
+                "18fb5fa7899d1277"
+            ]
+        ]
+    },
+    {
+        "id": "18fb5fa7899d1277",
+        "type": "trigger",
+        "z": "978e479f14af456d",
+        "name": "polling",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "nul",
+        "duration": "-500",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "stop",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1030,
+        "y": 560,
+        "wires": [
+            [
+                "ed0c8f15ad0732af"
+            ]
+        ]
+    },
+    {
+        "id": "05beb7b08689a8e0",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "session id query",
+        "func": "let sessionId = msg.payload\n\nif (typeof sessionId !== \"string\") {\n    sessionId = String(sessionId);\n}\n\nsessionId = sessionId.trim();\n\n\nmsg.payload = { _id:sessionId };\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1420,
+        "y": 720,
+        "wires": [
+            [
+                "b3c66f01dbcd26c2"
+            ]
+        ]
+    },
+    {
+        "id": "b3c66f01dbcd26c2",
+        "type": "mongodb4",
+        "z": "978e479f14af456d",
+        "clientNode": "5042053a0204010d",
+        "mode": "collection",
+        "collection": "sessions",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "",
+        "handleDocId": true,
+        "name": "get sessions",
+        "x": 1610,
+        "y": 720,
+        "wires": [
+            [
+                "c6b5e91e519c48ee",
+                "d5177ab23154c8dd"
+            ]
+        ]
+    },
+    {
+        "id": "2e74332b4500783f",
+        "type": "inject",
+        "z": "978e479f14af456d",
+        "name": "polling",
+        "props": [],
+        "repeat": "3600",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 440,
+        "y": 560,
+        "wires": [
+            [
+                "21b15d225359bb11"
+            ]
+        ]
+    },
+    {
+        "id": "3801e2e19c44cd83",
+        "type": "function",
+        "z": "978e479f14af456d",
+        "name": "clear table",
+        "func": "msg.payload=[];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2910,
+        "y": 660,
+        "wires": [
+            [
+                "ea28b240fc72d2c6"
+            ]
+        ]
+    },
+    {
+        "id": "7524edaf92fb5daf",
+        "type": "http in",
+        "z": "53ddc6348f2f7206",
+        "name": "",
+        "url": "/vitals/hr",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 440,
+        "wires": [
+            [
+                "435b5ca43b9d63ce"
+            ]
+        ]
+    },
+    {
+        "id": "d2dbfad67fd8a01e",
+        "type": "http in",
+        "z": "53ddc6348f2f7206",
+        "name": "",
+        "url": "vitals/gluco",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 380,
+        "wires": [
+            [
+                "435b5ca43b9d63ce"
+            ]
+        ]
+    },
+    {
+        "id": "6fea667346757f80",
+        "type": "http in",
+        "z": "53ddc6348f2f7206",
+        "name": "",
+        "url": "vitals/bp_sys",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 500,
+        "wires": [
+            [
+                "435b5ca43b9d63ce"
+            ]
+        ]
+    },
+    {
+        "id": "0b4f18f49a186602",
+        "type": "http in",
+        "z": "53ddc6348f2f7206",
+        "name": "",
+        "url": "/vitals/bp_dia",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 560,
+        "wires": [
+            [
+                "435b5ca43b9d63ce"
+            ]
+        ]
+    },
+    {
+        "id": "1c62f0165ce12774",
+        "type": "http in",
+        "z": "53ddc6348f2f7206",
+        "name": "",
+        "url": "/vitals/temp",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 620,
+        "wires": [
+            [
+                "435b5ca43b9d63ce"
+            ]
+        ]
+    },
+    {
+        "id": "aa50b8a18853fd94",
+        "type": "http in",
+        "z": "53ddc6348f2f7206",
+        "name": "",
+        "url": "/vitals/rr",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 680,
+        "wires": [
+            [
+                "435b5ca43b9d63ce"
+            ]
+        ]
+    },
+    {
+        "id": "ea68f0b8756eaebf",
+        "type": "http in",
+        "z": "53ddc6348f2f7206",
+        "name": "",
+        "url": "vitals/spo2",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 740,
+        "wires": [
+            [
+                "435b5ca43b9d63ce"
+            ]
+        ]
+    },
+    {
+        "id": "9f3e44d306fb95bd",
+        "type": "function",
+        "z": "53ddc6348f2f7206",
+        "name": "prepare influx write",
+        "func": "const MEAS_PREFIX = \"vitals_\";\nconst MEAS_MAP = { \n    \"heart_rate\": \"heart_rate\", \n    \"spo2\": \"spo2\", \n    \"glucose\": \"glucose\", \n    \"respiratory_rate\": \"respiratory_rate\", \n    \"body_temperature\": \"body_temperature\", \n    \"blood_pressure_sys\": \"blood_pressure_sys\", \n    \"blood_pressure_dia\": \"blood_pressure_dia\"\n};\n\nconst safe = s => String(s || \"\").replace(/[,= ]/g, \"_\");\n\nconst p = msg.payload || {};\nif (!p.type || p.value == null) {\n    node.status({ fill: \"red\", shape: \"ring\", text: \"missing type or value\" });\n    return null;\n}\n\nconst vnum = Number(p.value);\nif (!isFinite(vnum)) {\n    node.status({ fill: \"red\", shape: \"ring\", text: \"non-numeric value\" });\n    return null;\n}\n\nif (!MEAS_MAP[p.type]) {\n    node.status({ fill: \"yellow\", shape: \"ring\", text: `ignored: ${p.type} not in MEAS_MAP` });\n    return null;\n}\n\nlet measurement = safe(MEAS_MAP[p.type]);\nif (MEAS_PREFIX) measurement = safe(`${MEAS_PREFIX}${measurement}`);\n\nconst fields = { value: vnum };\nconst tags = {};\nif (p.device_id) tags.device_id = safe(p.device_id);\nif (p.sessionId) tags.sessionId = safe(p.sessionId);\nif (p.unit) tags.unit = safe(p.unit);\n\nmsg.payload = [fields, tags];\nmsg.measurement = measurement;\nmsg.timestamp = p.timestamp ? new Date(p.timestamp) : new Date();\n\nnode.status({ fill: \"green\", shape: \"dot\", text: `${measurement} ← ${p.type} (${vnum})` });\n\nreturn msg;\n",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 540,
+        "wires": [
+            [
+                "c2e63b47dca67c62",
+                "544294ca865198b3"
+            ],
+            [
+                "fbf35eec143d223e"
+            ]
+        ]
+    },
+    {
+        "id": "c2e63b47dca67c62",
+        "type": "function",
+        "z": "53ddc6348f2f7206",
+        "name": "ok",
+        "func": "msg.statusCode = 200;\nmsg.payload = {};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 540,
+        "wires": [
+            [
+                "640fe39f67b8085a",
+                "059044a06c15e31a"
+            ]
+        ]
+    },
+    {
+        "id": "640fe39f67b8085a",
+        "type": "http response",
+        "z": "53ddc6348f2f7206",
+        "name": "http response",
+        "statusCode": "",
+        "headers": {},
+        "x": 1000,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "fbf35eec143d223e",
+        "type": "http response",
+        "z": "53ddc6348f2f7206",
+        "name": "http response",
+        "statusCode": "",
+        "headers": {},
+        "x": 860,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "ca7c2c2b59a889c1",
+        "type": "http in",
+        "z": "53ddc6348f2f7206",
+        "name": "",
+        "url": "health",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "3584e5139f36eb5a"
+            ]
+        ]
+    },
+    {
+        "id": "3584e5139f36eb5a",
+        "type": "function",
+        "z": "53ddc6348f2f7206",
+        "name": "prepare influx write",
+        "func": "const p = msg.payload || {};\nif (!p.deviceId) { node.error(\"Missing deviceId\"); return null; }\n\nmsg.measurement = \"health\";\nmsg.tags = { device_id: p.deviceId };\nmsg.fields = { heartbeat: 1 };\n\nnode.status({ fill: \"green\", shape: \"dot\", text: `${p.deviceId} health sent` });\n\nreturn msg;\n",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "8aaa4df08fa73aa9",
+                "3f2c84620bcc80ba"
+            ],
+            [
+                "cc4c93667b3f7f41"
+            ]
+        ]
+    },
+    {
+        "id": "3f2c84620bcc80ba",
+        "type": "function",
+        "z": "53ddc6348f2f7206",
+        "name": "ok",
+        "func": "msg.statusCode = 200;\nmsg.payload = {};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 120,
+        "wires": [
+            [
+                "f31fc6f61372517b",
+                "b53a24a4c6c275db"
+            ]
+        ]
+    },
+    {
+        "id": "f31fc6f61372517b",
+        "type": "http response",
+        "z": "53ddc6348f2f7206",
+        "name": "http response",
+        "statusCode": "",
+        "headers": {},
+        "x": 960,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "cc4c93667b3f7f41",
+        "type": "http response",
+        "z": "53ddc6348f2f7206",
+        "name": "http response",
+        "statusCode": "",
+        "headers": {},
+        "x": 760,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "8aaa4df08fa73aa9",
+        "type": "influxdb out",
+        "z": "53ddc6348f2f7206",
+        "influxdb": "a0d7fdb0ab0db467",
+        "name": "influx write",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "acme-iot  ",
+        "bucket": "vitals",
+        "x": 750,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "544294ca865198b3",
+        "type": "influxdb out",
+        "z": "53ddc6348f2f7206",
+        "influxdb": "a0d7fdb0ab0db467",
+        "name": "influx write",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "acme-iot  ",
+        "bucket": "vitals",
+        "x": 850,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "435b5ca43b9d63ce",
+        "type": "json-full-schema-validator",
+        "z": "53ddc6348f2f7206",
+        "name": "validator",
+        "property": "payload",
+        "propertyType": "msg",
+        "func": "{\n        \"title\": \"IoT Measurement\",\n            \"description\": \"Schema for IoT measurements\",\n                \"type\": \"object\",\n                    \"properties\": {\n        \"timestamp\": {\n            \"type\": \"string\",\n                \"format\": \"date-time\",\n                    \"description\": \"Timestamp in ISO 8601 format\"\n        },\n        \"type\": {\n            \"type\": \"string\",\n                \"description\": \"Type of measurement (e.g., glucose, temperature, heart-rate)\"\n        },\n        \"unit\": {\n            \"type\": \"string\",\n                \"description\": \"Unit of measurement (mg/dL, bpm, °C, %, etc.)\"\n        },\n        \"value\": {\n            \"type\": [\"number\"],\n                \"description\": \"Measurement value; accepts numbers or strings for non-numeric sensors\"\n        },\n        \"device_id\": {\n            \"type\": \"string\",\n                \"description\": \"ID of the IoT device\"\n        },\n        \"sessionId\": {\n            \"type\": \"string\",\n                \"description\": \"Session identifier\"\n        }\n    },\n    \"required\": [\n        \"timestamp\",\n        \"type\",\n        \"unit\",\n        \"value\",\n        \"device_id\",\n        \"sessionId\"\n    ],\n    \"additionalProperties\": false\n}\n",
+        "x": 440,
+        "y": 540,
+        "wires": [
+            [
+                "9f3e44d306fb95bd"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b53a24a4c6c275db",
+        "type": "debug",
+        "z": "53ddc6348f2f7206",
+        "name": "status code",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "statusCode",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "059044a06c15e31a",
+        "type": "debug",
+        "z": "53ddc6348f2f7206",
+        "name": "status code",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "statusCode",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 990,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "ea2c4ced27056701",
+        "type": "function",
+        "z": "021a5a8ab20c8971",
+        "name": "prepare device query",
+        "func": "const query = {}; \nconst options = {\n    sort: { lastUpdate: 1 }\n};\nmsg.payload = [query, options];\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 200,
+        "wires": [
+            [
+                "a1076f242b2655c4"
+            ]
+        ]
+    },
+    {
+        "id": "d1461acc8ec4d642",
+        "type": "function",
+        "z": "021a5a8ab20c8971",
+        "name": "prapare influx query",
+        "func": "const devices = msg.payload || [];\nif (devices.length === 0) return null;\n\nconst deviceIds = devices.map(d => `\"${d._id}\"`).join(\", \");\n\nmsg.query = `\nfrom(bucket:\"vitals\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r._measurement == \"health\")\n  |> last()\n`;\n\nmsg.devices = devices;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 200,
+        "wires": [
+            [
+                "9546e5400243d75f"
+            ]
+        ]
+    },
+    {
+        "id": "aa16df2109ad6f80",
+        "type": "function",
+        "z": "021a5a8ab20c8971",
+        "name": "add device health",
+        "func": "const now = Date.now();\nconst points = msg.payload || [];\nconst devices = msg.devices || [];\n\nconst prevStates = global.get(\"deviceStates\") || {};\n\nconst results = devices.map(d => {\n    const point = points.find(p => p._value === d._id);\n    const lastTime = point ? new Date(point._time).getTime() : null;\n    const diff = lastTime ? (now - lastTime) / 1000 : null;\n    const isOnline = diff !== null && diff <= 5;\n\n    const status = isOnline ? \"🟢\" : \"🔴\";\n\n    const prevStatus = prevStates[d._id];\n    if (prevStatus && prevStatus !== status) {\n        const alertMsg = {\n            payload: `⚠️ Device ${d._id} has changed to ${isOnline ? \"ONLINE 🟢\" : \"OFFLINE 🔴\"}`,\n        };\n        node.send([null, alertMsg]);\n    }\n\n    prevStates[d._id] = status;\n\n    return {\n        _id: d._id,\n        name: d.name,\n        status: status,\n        lastUpdate: lastTime ? new Date(lastTime).toISOString() : \"-\"\n    };\n});\n\nglobal.set(\"deviceStates\", prevStates);\nreturn [{ payload: results }, null];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1270,
+        "y": 200,
+        "wires": [
+            [],
+            [
+                "06a4c5cdc9b28dc7"
+            ]
+        ]
+    },
+    {
+        "id": "9546e5400243d75f",
+        "type": "influxdb in",
+        "z": "021a5a8ab20c8971",
+        "influxdb": "a0d7fdb0ab0db467",
+        "name": "influx in",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "acme-iot",
+        "x": 1060,
+        "y": 200,
+        "wires": [
+            [
+                "aa16df2109ad6f80"
+            ]
+        ]
+    },
+    {
+        "id": "a1076f242b2655c4",
+        "type": "mongodb4",
+        "z": "021a5a8ab20c8971",
+        "clientNode": "5042053a0204010d",
+        "mode": "collection",
+        "collection": "devices",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "",
+        "handleDocId": true,
+        "name": "get devices",
+        "x": 610,
+        "y": 200,
+        "wires": [
+            [
+                "d1461acc8ec4d642"
+            ]
+        ]
+    },
+    {
+        "id": "4458271b57285361",
+        "type": "e-mail",
+        "z": "021a5a8ab20c8971",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": false,
+        "name": "",
+        "dname": "email",
+        "x": 1690,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "06a4c5cdc9b28dc7",
+        "type": "function",
+        "z": "021a5a8ab20c8971",
+        "name": "prepare email",
+        "func": "var fromEmail = env.get(\"FROM_EMAIL\"); \n\nmsg.topic = \"Alert IoT\"; \nmsg.to = fromEmail;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 200,
+        "wires": [
+            [
+                "4458271b57285361"
+            ]
+        ]
+    },
+    {
+        "id": "3d519b4a41ba3bbf",
+        "type": "inject",
+        "z": "021a5a8ab20c8971",
+        "name": "Polling Data",
+        "props": [],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "ea2c4ced27056701"
+            ]
+        ]
+    }
+]

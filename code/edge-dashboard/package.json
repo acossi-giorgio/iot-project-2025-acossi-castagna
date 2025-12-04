@@ -1,0 +1,23 @@
+{
+    "name": "iot-ssr-mock-dashboard",
+    "type": "module",
+    "scripts": {
+        "dev": "node --watch server.mjs",
+        "start": "node server.mjs",
+        "simulate": "node ./scripts/simulate.mjs"
+    },
+    "dependencies": {
+        "@langchain/community": "^0.3.55",
+        "@langchain/core": "^0.3.75",
+        "@langchain/ollama": "^0.2.4",
+        "dotenv": "^16.6.1",
+        "ejs": "^3.1.10",
+        "express": "^4.19.2",
+        "express-ejs-layouts": "^2.5.1",
+        "langchain": "^0.3.33",
+        "node-fetch": "^3.3.2",
+        "redis": "^4.6.13",
+        "winston": "^3.18.3",
+        "zod": "^3.23.8"
+    }
+}

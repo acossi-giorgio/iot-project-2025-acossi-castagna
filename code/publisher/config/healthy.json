@@ -1,0 +1,82 @@
+{
+    "mqtt_url": "mqtt://localhost:1883",
+    "sensors": [
+        {
+            "type": "heart_rate",
+            "topic": "vitals/hr",
+            "unit": "bpm",
+            "interval_ms": 1000,
+            "distribution": "normal",
+            "mean": 72,
+            "std_dev": 4,
+            "min": 60,
+            "max": 85
+        },
+        {
+            "type": "blood_pressure_sys",
+            "topic": "vitals/bp_sys",
+            "unit": "mmHg",
+            "interval_ms": 2000,
+            "distribution": "normal",
+            "mean": 120,
+            "std_dev": 5,
+            "min": 110,
+            "max": 130
+        },
+        {
+            "type": "blood_pressure_dia",
+            "topic": "vitals/bp_dia",
+            "unit": "mmHg",
+            "interval_ms": 2000,
+            "distribution": "normal",
+            "mean": 75,
+            "std_dev": 3,
+            "min": 68,
+            "max": 80
+        },
+        {
+            "type": "respiratory_rate",
+            "topic": "vitals/rr",
+            "unit": "breaths/min",
+            "interval_ms": 3000,
+            "distribution": "normal",
+            "mean": 16,
+            "std_dev": 2,
+            "min": 12,
+            "max": 20
+        },
+        {
+            "type": "spo2",
+            "topic": "vitals/spo2",
+            "unit": "%",
+            "interval_ms": 3000,
+            "distribution": "normal",
+            "mean": 98,
+            "std_dev": 1,
+            "min": 96,
+            "max": 100
+        },
+        {
+            "type": "body_temperature",
+            "topic": "vitals/temp",
+            "unit": "°C",
+            "interval_ms": 5000,
+            "distribution": "normal",
+            "mean": 36.6,
+            "std_dev": 0.2,
+            "min": 36.0,
+            "max": 37.2
+        },
+        {
+            "type": "glucose",
+            "topic": "vitals/gluco",
+            "unit": "mg/dL",
+            "interval_ms": 10000,
+            "distribution": "normal",
+            "mean": 95,
+            "std_dev": 5,
+            "min": 80,
+            "max": 110
+        }
+    ]
+}

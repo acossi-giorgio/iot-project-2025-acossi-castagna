@@ -1,0 +1,66 @@
+http:
+  port: 8080
+
+https:
+  port: 8443
+  tls:
+    default:
+      key: /app/certs/server.key
+      cert: /app/certs/server.crt
+      ca: 
+        - /app/certs/ca.crt
+      requestCert: true
+      rejectUnauthorized: true
+
+admin:
+  port: 9876
+  host: 0.0.0.0
+
+apiEndpoints:
+  backend:
+    paths: "/api/backend/*"
+  nodered:
+    paths: "/api/nodered/*"
+  influxdb:
+    paths: "/api/influxdb/*"
+
+serviceEndpoints:
+  backend:
+    url: "http://backend:5000"
+  nodered:
+    url: "http://node-red:1880"
+  influxdb:
+    url: "http://influxdb:8086"
+
+policies:
+  - key-auth
+  - proxy
+
+pipelines:
+  backendPipeline:
+    apiEndpoints:
+      - backend
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: backend
+              changeOrigin: true
+              stripPath: true
+  noderedPipeline:
+    apiEndpoints:
+      - nodered
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: nodered
+              changeOrigin: true
+              stripPath: true
+  influxdbPipeline:
+    apiEndpoints:
+      - influxdb
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: influxdb
+              changeOrigin: true
+              stripPath: true

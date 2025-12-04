@@ -1,0 +1,20 @@
+use iot
+db.devices.insertMany([
+    {
+        _id: "device-1",
+        name: "Device-1"
+    },
+    {
+        _id: "device-2",
+        name: "Device-2"
+    },
+    {
+        _id: "device-3",
+        name: "Device-3"
+    },
+    {
+        _id: "device-4",
+        name: "Device-4"
+    }
+])
+db.devices.createIndex({ lastUpdate: 1})

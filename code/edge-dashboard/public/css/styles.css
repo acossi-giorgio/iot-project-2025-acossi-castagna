@@ -1,0 +1,130 @@
+.charts-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  align-items: stretch;
+}
+
+.charts-grid-fixed {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: stretch;
+}
+
+@media (max-width: 1100px) {
+  .charts-grid-fixed {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 800px) {
+  .charts-grid-fixed {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-card .card-body {
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1400px) and (min-height: 900px) {
+  .chart-card .card-body {
+    height: 320px;
+  }
+}
+
+.chart-card .chart-area {
+  flex: 1 1 auto;
+  position: relative;
+  min-height: 0;
+}
+
+#chat-thread .markdown > :first-child {
+  margin-top: 0 !important;
+}
+#chat-thread .markdown > :last-child {
+  margin-bottom: 0 !important;
+}
+#chat-thread .markdown h1,
+#chat-thread .markdown h2,
+#chat-thread .markdown h3,
+#chat-thread .markdown h4,
+#chat-thread .markdown h5,
+#chat-thread .markdown h6 {
+  margin-top: 0.1rem;
+  margin-bottom: 0.5rem;
+}
+#chat-thread .markdown p {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+#chat-thread .markdown p:last-child {
+  margin-bottom: 0;
+}
+
+.app-sidebar {
+  flex: 0 0 220px;
+  width: 220px;
+  max-width: 220px;
+}
+
+.min-h-0 {
+  min-height: 0 !important;
+}
+
+body.page-chat main {
+  height: 100vh;
+  overflow: hidden !important;
+  display: flex;
+  flex-direction: column;
+}
+body.page-chat #page-root {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+body.page-chat .chat-card {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+body.page-chat #chat-thread {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+.typing-dots {
+  display: inline-flex;
+  gap: 4px;
+}
+.typing-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0d6efd;
+  opacity: 0.3;
+  animation: dotPulse 1s infinite ease-in-out;
+}
+.typing-dots .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-dots .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes dotPulse {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}

@@ -1,0 +1,129 @@
+<section class="mb-3">
+  <div class="row g-3">
+    <div class="col-12">
+      <div class="row g-3">
+        <div class="col">
+          <div class="card shadow-sm text-center">
+            <div
+              class="card-body py-3 d-flex flex-column justify-content-center"
+            >
+              <div class="text-muted small">Heart Rate</div>
+              <div class="fs-3 fw-bold" id="tile-hr">--</div>
+              <div class="text-muted small">bpm</div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm text-center">
+            <div
+              class="card-body py-3 d-flex flex-column justify-content-center"
+            >
+              <div class="text-muted small">Blood Pressure</div>
+              <div class="fs-3 fw-bold" id="tile-bp">--/--</div>
+              <div class="text-muted small">mmHg</div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm text-center">
+            <div
+              class="card-body py-3 d-flex flex-column justify-content-center"
+            >
+              <div class="text-muted small">Oxygen Saturation</div>
+              <div class="fs-3 fw-bold" id="tile-spo2">--</div>
+              <div class="text-muted small">%</div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm text-center">
+            <div
+              class="card-body py-3 d-flex flex-column justify-content-center"
+            >
+              <div class="text-muted small">Body Temperature</div>
+              <div class="fs-3 fw-bold" id="tile-temp">--</div>
+              <div class="text-muted small">°C</div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm text-center">
+            <div
+              class="card-body py-3 d-flex flex-column justify-content-center"
+            >
+              <div class="text-muted small">Respiratory Rate</div>
+              <div class="fs-3 fw-bold" id="tile-rr">--</div>
+              <div class="text-muted small">rpm</div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm text-center">
+            <div
+              class="card-body py-3 d-flex flex-column justify-content-center"
+            >
+              <div class="text-muted small">Glucometer</div>
+              <div class="fs-3 fw-bold" id="tile-gluco">--</div>
+              <div class="text-muted small">mg/dL</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="charts-grid-fixed">
+    <div class="card shadow-sm chart-card">
+      <div class="card-body">
+        <h3 class="h6 mb-2">Glucometer</h3>
+        <div class="chart-area"><canvas id="chart-gluco"></canvas></div>
+      </div>
+    </div>
+    <div class="card shadow-sm chart-card">
+      <div class="card-body">
+        <h3 class="h6 mb-2">Heart Rate</h3>
+        <div class="chart-area"><canvas id="chart-hr"></canvas></div>
+      </div>
+    </div>
+    <div class="card shadow-sm chart-card">
+      <div class="card-body">
+        <h3 class="h6 mb-2">Oxygen Saturation</h3>
+        <div class="chart-area"><canvas id="chart-spo2"></canvas></div>
+      </div>
+    </div>
+    <div class="card shadow-sm chart-card">
+      <div class="card-body">
+        <h3 class="h6 mb-2">Body Temperature</h3>
+        <div class="chart-area"><canvas id="chart-temp"></canvas></div>
+      </div>
+    </div>
+    <div class="card shadow-sm chart-card">
+      <div class="card-body">
+        <h3 class="h6 mb-2">Pressure (Sys/Dia)</h3>
+        <div class="chart-area"><canvas id="chart-bp"></canvas></div>
+      </div>
+    </div>
+    <div class="card shadow-sm chart-card">
+      <div class="card-body">
+        <h3 class="h6 mb-2">Respiration Rate</h3>
+        <div class="chart-area"><canvas id="chart-rr"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.__SENSORS__ = {
+    timestamps: [],
+    hr: [],
+    rr: [],
+    spo2: [],
+    temp: [],
+    bp: { sys: [], dia: [] },
+    gluco: [],
+    ecg: [],
+  };
+</script>
+<script src="/public/js/dashboard.js" defer></script>

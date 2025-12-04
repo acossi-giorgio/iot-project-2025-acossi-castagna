@@ -1,0 +1,14 @@
+from(bucket:"vitals")
+  |> range(start: -1h)
+  |> filter(fn: (r) => r._measurement == "health")
+  |> last()
+
+
+
+from(bucket: "vitals")
+  |> range(start: 0)
+  |> filter(fn: (r) => r["_measurement"] == "vitals_heart_rate")
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["sessionId"] == "690486f397abf9198a9eaae1")
+  |> sort(columns: ["_time"], desc: false)
+  |> yield(name: "raw")
