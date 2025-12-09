@@ -112,6 +112,7 @@
           class="btn btn-outline-success d-flex align-items-center justify-content-center px-2"
           aria-pressed="false"
           title="Active analysis of clinical data for this question"
+          <%= (typeof offline !== 'undefined' && offline) ? 'disabled' : '' %>
         >
           <svg
             id="chat-data-analysis-icon"
@@ -136,13 +137,15 @@
           name="message"
           rows="1"
           class="form-control"
-          placeholder=""
+          placeholder="<%= (typeof offline !== 'undefined' && offline) ? 'Chat disabled in offline mode' : '' %>"
           autocomplete="off"
+          <%= (typeof offline !== 'undefined' && offline) ? 'disabled' : '' %>
         ></textarea>
         <button
           type="submit"
           id="send-btn"
           class="btn btn-primary d-inline-flex align-items-center justify-content-center"
+          <%= (typeof offline !== 'undefined' && offline) ? 'disabled' : '' %>
         >
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
             <path d="M3 11l18-8-8 18-2-7-8-3z" fill="currentColor" />

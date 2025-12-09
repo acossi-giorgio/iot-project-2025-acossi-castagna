@@ -252,4 +252,11 @@
 
     refreshMetrics();
     setInterval(refreshMetrics, 1000);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('offline') === 'true') {
+        setTimeout(() => {
+             window.IoTToasts?.show('Backend not reachable starting in offline mode', { variant: 'warning', delay: 5000 });
+        }, 500);
+    }
 })();

@@ -34,7 +34,11 @@
             }
             const sessionData = await response.json();
             localStorage.setItem('sessionId', sessionData.id);
-            window.location.replace('/dashboard?sessionId=' + encodeURIComponent(sessionData.id));
+            let redirectUrl = '/dashboard?sessionId=' + encodeURIComponent(sessionData.id);
+            if (sessionData.offline) {
+                redirectUrl += '&offline=true';
+            }
+            window.location.replace(redirectUrl);
         } catch (error) {
             window.IoTToasts?.show(error.message, { variant: 'danger', delay: 5000 });
         } finally {

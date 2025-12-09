@@ -2,25 +2,36 @@ import fetch from 'node-fetch';
 import { getRedis } from '../config/redis.mjs';
 import https from 'https';
 import { env } from '../config/env.mjs';
+import { logger } from '../config/logger.mjs';
+import { v4 as uuidv4 } from 'uuid';
 
 async function startSessionRequest() {
+  const logPrefix = '| startSessionRequest |';
   const base = env.backendBaseUrl;
   const url = `${base}/session/start`;
   const body = { deviceId: env.deviceId };
   const agent = new https.Agent({ rejectUnauthorized: false });
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 
-      'Content-Type': 'application/json',
-      'Authorization': env.apiKey
-    },
-    body: JSON.stringify(body),
-    agent: agent
-  });
-  if (!response.ok) throw new Error(`start session failed status ${response.status}`);
-  const jsonResponse = await response.json();
-  if (!jsonResponse.sessionId) throw new Error('missing sessionId in response');
-  return jsonResponse.sessionId;
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': env.apiKey
+      },
+      body: JSON.stringify(body),
+      agent: agent
+    });
+    if (!response.ok) {
+      logger.error(`${logPrefix} create session failed offline mode`);
+      return { sessionId: uuidv4(), offline: true };
+    }
+    const jsonResponse = await response.json();
+    if (!jsonResponse.sessionId) throw new Error('missing sessionId in response');
+    return { sessionId: jsonResponse.sessionId, offline: false };
+  } catch (e) {
+    logger.error(`${logPrefix} create session failed offline mode: ${e.message}`);
+    return { sessionId: uuidv4(), offline: true };
+  }
 }
 
 async function closeSessionRequest(sessionId) {
@@ -57,9 +68,9 @@ async function getSession() {
 }
 
 export async function startSession() {
-  const sessionId = await startSessionRequest();
+  const { sessionId, offline } = await startSessionRequest();
   await setSession(sessionId);
-  return sessionId;
+  return { sessionId, offline };
 }
 
 export async function endSession(sessionId) {

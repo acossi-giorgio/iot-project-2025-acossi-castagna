@@ -10,8 +10,8 @@ router.post('/', async (req, res) => {
   const logPrefix = '| POST /session |';
   try {
     logger.info(`${logPrefix} Start session request received`);
-    const id = await startSession();
-    return res.status(201).json({id: id});
+    const { sessionId, offline } = await startSession();
+    return res.status(201).json({id: sessionId, offline});
   } catch (e) {
     logger.error(`${logPrefix} ${e?.name} ${e?.message}`, { stack: e?.stack });
     res.status(500).json({ error: { name: e.name, message: e.message, stack: e.stack } });

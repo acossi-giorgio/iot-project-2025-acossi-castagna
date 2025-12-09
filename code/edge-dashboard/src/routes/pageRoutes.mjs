@@ -13,20 +13,24 @@ router.get(['/', '/session'], (req, res) => {
 
 router.get('/dashboard', requireSession, (req, res) => {
   const sessionId = res.locals.sessionId;
+  const offline = req.query.offline === 'true';
   res.render('dashboard', { 
     pageTitle : 'Dashboard',
     sessionId: sessionId, 
-    hideDock: false
+    hideDock: false,
+    offline: offline
   });
 });
 
 router.get('/chat', requireSession, async (req, res) => {
   const sessionId = res.locals.sessionId;
+  const offline = req.query.offline === 'true';
   const messages = await getMessages(sessionId);
     res.render('chat', {
       pageTitle : 'Chat',
       sessionId: sessionId,
       messages: messages,
-      hideDock: false
+      hideDock: false,
+      offline: offline
     });
 });

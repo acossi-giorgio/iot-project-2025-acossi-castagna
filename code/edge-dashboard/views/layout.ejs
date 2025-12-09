@@ -41,7 +41,7 @@
       <nav class="app-sidebar d-flex flex-column bg-white border-end shadow-sm">
         <div class="nav flex-column py-2">
           <a
-            href="/dashboard<% if (typeof sessionId !== 'undefined') { %>?sessionId=<%= sessionId %><% } %>"
+            href="/dashboard<% if (typeof sessionId !== 'undefined') { %>?sessionId=<%= sessionId %><% } %><% if (typeof offline !== 'undefined' && offline) { %>&offline=true<% } %>"
             class="nav-link px-3 py-2 d-flex align-items-center gap-2 sidebar-link <%= pageTitle && pageTitle.toLowerCase().includes('dashboard') ? 'text-dark fw-semibold active' : 'text-secondary' %>"
           >
             <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
@@ -53,8 +53,9 @@
             <span>Dashboard</span>
           </a>
           <a
-            href="/chat<% if (typeof sessionId !== 'undefined') { %>?sessionId=<%= sessionId %><% } %>"
-            class="nav-link px-3 py-2 d-flex align-items-center gap-2 sidebar-link <%= pageTitle && pageTitle.toLowerCase().includes('chat') ? 'text-dark fw-semibold active' : 'text-secondary' %>"
+            href="/chat<% if (typeof sessionId !== 'undefined') { %>?sessionId=<%= sessionId %><% } %><% if (typeof offline !== 'undefined' && offline) { %>&offline=true<% } %>"
+            class="nav-link px-3 py-2 d-flex align-items-center gap-2 sidebar-link <%= pageTitle && pageTitle.toLowerCase().includes('chat') ? 'text-dark fw-semibold active' : 'text-secondary' %> <%= (typeof offline !== 'undefined' && offline) ? 'disabled opacity-50' : '' %>"
+            <% if (typeof offline !== 'undefined' && offline) { %>aria-disabled="true" tabindex="-1"<% } %>
           >
             <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
               <path d="M4 4h16v12H7l-3 3V4z" fill="currentColor" />
@@ -132,7 +133,7 @@
           // chiusura automatica completa
           await fetch(`/api/session/${encodeURIComponent(id)}`, { method: "DELETE" });
           localStorage.removeItem("sessionId");
-          window.IoTToasts?.show("Sessione scaduta", { variant: "warning", delay: 3000 });
+          window.IoTToasts?.show("Session expired", { variant: "warning", delay: 3000 });
           setTimeout(() => window.location.replace("/session"), 1000);
         }
       } catch (e) {
