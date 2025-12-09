@@ -35,20 +35,25 @@ async function startSessionRequest() {
 }
 
 async function closeSessionRequest(sessionId) {
+  const logPrefix = '| closeSessionRequest |';
   const base = env.backendBaseUrl;
   const url = `${base}/session/end`;
   const body = { deviceId: env.deviceId, sessionId: sessionId };
   const agent = new https.Agent({ rejectUnauthorized: false });
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 
-      'Content-Type': 'application/json',
-      'Authorization': env.apiKey
-    },
-    body: JSON.stringify(body),
-    agent: agent
-  });
-  if (!response.ok) throw new Error(`end session failed status ${response.status}`);
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': env.apiKey
+      },
+      body: JSON.stringify(body),
+      agent: agent
+    });
+    if (!response.ok) throw new Error(`end session failed status ${response.status}`);
+  } catch (e) {
+    logger.error(`${logPrefix} delete session failed: ${e.message}`);
+  }
 }
 
 async function setSession(sessionId) {
@@ -57,9 +62,15 @@ async function setSession(sessionId) {
   await client.set("sessionId", sessionId, { EX: ttlSeconds });
 }
 
+async function setOfflineMode(isOffline) {
+  const client = await getRedis();
+  await client.set(env.data.offlineMode, isOffline.toString());
+}
+
 async function deleteSession() {
   const client = await getRedis();
   await client.del(env.data.sessionId);
+  await client.del(env.data.offlineMode);
 }
 
 async function getSession() {
@@ -70,13 +81,13 @@ async function getSession() {
 export async function startSession() {
   const { sessionId, offline } = await startSessionRequest();
   await setSession(sessionId);
+  await setOfflineMode(offline);
   return { sessionId, offline };
 }
 
 export async function endSession(sessionId) {
   if (!sessionId) return;
   await closeSessionRequest(sessionId);
-  const client = await getRedis();
   await deleteSession();
 }
 

@@ -32,6 +32,7 @@ export const env = {
 
   data: {
     sessionId: 'sessionId',
+    offlineMode: 'offlineMode',
     chat: 'chat',
     metrics: {
       hr: 'vitals:hr',

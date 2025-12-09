@@ -67,14 +67,11 @@ export async function getLastMetrics(minutes) {
 
 export async function deleteMetrics() {
   const client = await getRedis();
-  const keys = [
-    env.data.metrics.hr,
-    env.data.metrics.rr,
-    env.data.metrics.spo2,
-    env.data.metrics.temp,
-    env.data.metrics.gluco,
-    env.data.metrics.bpSys,
-    env.data.metrics.bpDia
-  ].filter(Boolean);
-  await Promise.all(keys.map((k) => client.del(k)));
+  await client.del(env.data.metrics.hr);
+  await client.del(env.data.metrics.rr);
+  await client.del(env.data.metrics.spo2);
+  await client.del(env.data.metrics.temp);
+  await client.del(env.data.metrics.gluco);
+  await client.del(env.data.metrics.bpSys);
+  await client.del(env.data.metrics.bpDia);
 }
